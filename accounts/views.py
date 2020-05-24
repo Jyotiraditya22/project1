@@ -7,10 +7,13 @@ def home(request):
 
 def signup(request):
     if request.method == 'POST':
+        print("Inside1")
         # User has info and wants an account now!
         if request.POST['password1'] == request.POST['password2']:
+            print("Inside2")
             try:
                 user = User.objects.get(username=request.POST['username'])
+                print("Inside1")
                 return render(request, 'accounts/signup.html', {'error':'Username has already been taken'})
             except User.DoesNotExist:
                 user = User.objects.create_user(request.POST['username'], password=request.POST['password1'])
